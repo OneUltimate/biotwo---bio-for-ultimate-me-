@@ -1,40 +1,87 @@
-function createSnowflake() {
-    const snowflake = document.createElement('div');
-    snowflake.className = 'snowflake';
+function createChar() {
+    const chars = '01';
+    const char = chars[Math.floor(Math.random() * chars.length)];
     
-    // Случайные параметры
+    const element = document.createElement('div');
+    element.className = 'falling-char';
+    element.textContent = char;
+    element.style.color = '#3d918c'; 
+    
+    
     const startLeft = Math.random() * 100;
-    const animationDuration = 5 + Math.random() * 10;
-    const delay = Math.random() * 5;
-    const scale = 0.5 + Math.random();
+    const animationDuration = 3 + Math.random() * 5;
+    const delay = Math.random() * 2;
+    const fontSize = 14 + Math.random() * 20;
+    const rotate = Math.random() * 360;
     
-    // Применяем стили
-    snowflake.style.left = `${startLeft}%`;
-    snowflake.style.animationDuration = `${animationDuration}s`;
-    snowflake.style.animationDelay = `${delay}s`;
-    snowflake.style.transform = `scale(${scale})`;
+
+    element.style.left = `${startLeft}%`;
+    element.style.animationDuration = `${animationDuration}s`;
+    element.style.animationDelay = `${delay}s`;
+    element.style.fontSize = `${fontSize}px`;
+    element.style.transform = `rotate(${rotate}deg)`;
     
-    document.querySelector('.snowflakes').appendChild(snowflake);
+    document.querySelector('.chars-container').appendChild(element);
     
-    // Удаление снежинки после анимации
-    setTimeout(() => snowflake.remove(), (animationDuration + delay) * 1000);
+    
+    setTimeout(() => element.remove(), (animationDuration + delay) * 1000);
 }
 
-// Инициализация снегопада
-function initSnow() {
-    // Создаем контейнер для снежинок
+
+function initCharsFall() {
     const container = document.createElement('div');
-    container.className = 'snowflakes';
+    container.className = 'chars-container';
     document.body.appendChild(container);
 
-    // Запускаем генератор снежинок
-    setInterval(createSnowflake, 300);
+    setInterval(createChar, 150);
     
-    // Очистка при изменении размера окна
     window.addEventListener('resize', () => {
         container.innerHTML = '';
     });
 }
 
-// Запускаем после полной загрузки страницы
-window.addEventListener('DOMContentLoaded', initSnow);
+window.addEventListener('DOMContentLoaded', initCharsFall);
+
+
+const strings = [
+    "Сегодня не завтра, завтра не сегодня",
+    "Упал вставай пай чокопай",
+    "shadow never more",
+    "Дура, верни сотку, ну пожалуйста",
+    "© 2025 Алексей Индастриз. Все права защищены."
+];
+
+const element = document.getElementById('animated-text');
+let currentString = 0;
+let currentChar = 0;
+let isDeleting = false;
+const typingSpeed = 100;
+const deleteSpeed = 50;
+const pauseBetween = 1500;
+
+function typeText() {
+    const text = strings[currentString];
+    
+    if (!isDeleting) {
+        element.textContent = text.slice(0, currentChar + 1);
+        currentChar++;
+        
+        if (currentChar === text.length) {
+            isDeleting = true;
+            setTimeout(typeText, pauseBetween);
+            return;
+        }
+    } else {
+        element.textContent = text.slice(0, currentChar - 1);
+        currentChar--;
+        
+        if (currentChar === 0) {
+            isDeleting = false;
+            currentString = (currentString + 1) % strings.length;
+        }
+    }
+
+    setTimeout(typeText, isDeleting ? deleteSpeed : typingSpeed);
+}
+
+document.addEventListener('DOMContentLoaded', typeText);
