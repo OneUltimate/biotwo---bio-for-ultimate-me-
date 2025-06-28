@@ -44,6 +44,7 @@ window.addEventListener('DOMContentLoaded', initCharsFall);
 
 
 const strings = [
+    "Приятно познакомиться, Алексей, но не Zitraks",
     "Сегодня не завтра, завтра не сегодня",
     "Упал вставай пай чокопай",
     "shadow never more",
