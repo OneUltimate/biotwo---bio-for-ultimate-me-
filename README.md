@@ -1,4 +1,4 @@
-# biotwo
+# bio
 
 my test page for bio
 
