@@ -169,32 +169,27 @@ ul li::before {
     gap: 12px;
 }
 
+
 .contact-item {
     display: flex;
-    align-items: center;
-    gap: 20px;
-    transition: all 0.3s ease;
-}
-
-.contact-item i {
-    font-size: 25px;
-    width: 25px;
-    color: #ddcccc;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .contact-item a {
-    color: #333; 
+    color: #ffffff !important; 
     text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-.contact-item:hover a {
-    color: #ffffff; 
-}
-
-.contact-item:hover i {
+.contact-item a:hover {
+    color: #00ffff !important; 
     transform: scale(1.1);
 }
 
+.contact-item i {
+    font-size: 24px;
+}
 .text-animation {
     font-size: 1.2em;
     color: #cccccc;
