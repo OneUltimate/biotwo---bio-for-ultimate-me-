@@ -49,7 +49,8 @@ const strings = [
     "Упал вставай пай чокопай",
     "shadow never more",
     "icantbeliveletyougetaway",
-    "© 2025 Алексей Индастриз. Все права защищены."
+    "© 2025 Алексей Индастриз. Все права защищены.", 
+    "fulstack developer"
 ];
 
 const element = document.getElementById('animated-text');
